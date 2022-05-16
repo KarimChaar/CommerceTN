@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Sign up Page"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"/>
+    <EditText
+        android:layout_below="@id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:hint="name"
+        android:layout_marginTop="46dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="12dp"
+        android:background="@drawable/border"
+        />
+
+    <EditText
+        android:layout_below="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/surname"
+        android:hint="surname"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="12dp"
+        android:background="@drawable/border"
+        />
+    <EditText
+        android:layout_below="@+id/surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tel"
+        android:hint="phone number"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+        android:drawablePadding="12dp"
+        android:background="@drawable/border"
+        />
+
+    <EditText
+        android:layout_below="@+id/tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:hint="Login"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:drawableLeft="@drawable/ic_baseline_alternate_email_24"
+        android:drawablePadding="12dp"
+        android:background="@drawable/border"
+        />
+
+    <EditText
+        android:layout_below="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pwd"
+        android:hint="password"
+        android:padding="12dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawablePadding="8dp"
+        android:background="@drawable/border"
+        />
+
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pwd"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="sign up" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pwd"
+        android:layout_gravity="center"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="6dp"
+        android:text="Login" />
+
+</RelativeLayout>
