@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/drawable/add_btn.xml" value="0.125" />
+        <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/drawable/annuler.xml" value="0.125" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/drawable/blue_cercle.xml" value="0.1635" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/drawable/green_cercle.xml" value="0.1635" />
@@ -31,6 +33,7 @@
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/drawable/yellow_cercle.xml" value="0.1635" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.13119143239625167" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1287568306010929" />
+        <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/layout/activity_ajout_pdt.xml" value="0.25" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/layout/activity_home_page.xml" value="0.22" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/layout/activity_immobilier.xml" value="0.18" />
         <entry key="..\:/Users/Karim-Chaar/AndroidStudioProjects/Bi3wIchri/app/src/main/res/layout/activity_login.xml" value="0.12" />

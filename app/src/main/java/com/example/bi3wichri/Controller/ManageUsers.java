@@ -70,6 +70,24 @@ public void close(){
             ManageTUsers.close();
     }
 
+    public User getUser(String login){
+        User u = new User();
+        ManageTUsers=this.getReadableDatabase();
+        String query="select * from users where login = ? ;";
+        Cursor cursor=ManageTUsers.rawQuery(query,new String[]{login});
+        if (cursor.moveToFirst()){
+            u.setId_U(cursor.getInt(0));
+            u.setNom_U(cursor.getString(1));
+            u.setPrenom_U(cursor.getString(2));
+            u.setTel_U(cursor.getString(3));
+            u.setLogin(cursor.getString(4));
+            u.setMdp(cursor.getString(5));
+        }
+        cursor.close();
+        ManageTUsers.close();
+        return  u;
+    }
+
     public User verifAuthentification(String login, String mdp){
 
         ManageTUsers=this.getReadableDatabase();

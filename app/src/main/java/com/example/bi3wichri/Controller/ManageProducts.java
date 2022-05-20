@@ -73,6 +73,78 @@ public class ManageProducts extends DBHandler {
         ManageTProducts.close();
         return produits;
     }
+
+    public List<Produit> getAllProductMultimedia(){
+
+        ManageTProducts=this.getReadableDatabase();
+        String query="select * from produits where cat_P='Multimedia';";
+        Cursor cursor= ManageTProducts.rawQuery(query,null);
+        if(cursor.getCount()==0){
+            return null;
+        }
+        List<Produit> produits = new ArrayList<Produit>();
+        if (cursor.moveToFirst()){
+            do{
+                Produit prod= new Produit();
+                prod.setNom_P(cursor.getString(1));
+                prod.setPrix_P(cursor.getDouble(2));
+                prod.setDescription_P(cursor.getString(3));
+                prod.setCategorie_P(cursor.getString(4));
+                produits.add(prod);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        ManageTProducts.close();
+        return produits;
+    }
+
+    public List<Produit> getAllProductVehicule(){
+
+        ManageTProducts=this.getReadableDatabase();
+        String query="select * from produits where cat_P='Vehicule';";
+        Cursor cursor= ManageTProducts.rawQuery(query,null);
+        if(cursor.getCount()==0){
+            return null;
+        }
+        List<Produit> produits = new ArrayList<Produit>();
+        if (cursor.moveToFirst()){
+            do{
+                Produit prod= new Produit();
+                prod.setNom_P(cursor.getString(1));
+                prod.setPrix_P(cursor.getDouble(2));
+                prod.setDescription_P(cursor.getString(3));
+                prod.setCategorie_P(cursor.getString(4));
+                produits.add(prod);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        ManageTProducts.close();
+        return produits;
+    }
+
+    public List<Produit> getAllProductEmplois(){
+
+        ManageTProducts=this.getReadableDatabase();
+        String query="select * from produits where cat_P='Emplois';";
+        Cursor cursor= ManageTProducts.rawQuery(query,null);
+        if(cursor.getCount()==0){
+            return null;
+        }
+        List<Produit> produits = new ArrayList<Produit>();
+        if (cursor.moveToFirst()){
+            do{
+                Produit prod= new Produit();
+                prod.setNom_P(cursor.getString(1));
+                prod.setPrix_P(cursor.getDouble(2));
+                prod.setDescription_P(cursor.getString(3));
+                prod.setCategorie_P(cursor.getString(4));
+                produits.add(prod);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        ManageTProducts.close();
+        return produits;
+    }
 /*
     public void delete(Users u){
         ManageTUsers=this.open();
