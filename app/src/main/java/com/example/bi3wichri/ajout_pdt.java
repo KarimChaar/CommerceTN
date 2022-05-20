@@ -1,5 +1,6 @@
 package com.example.bi3wichri;
 
+
         import androidx.annotation.NonNull;
 
         import android.Manifest;
@@ -20,17 +21,13 @@ package com.example.bi3wichri;
         import android.graphics.Bitmap;
         import android.net.Uri;
         import android.widget.Toast;
-
-
-
-
-
         import androidx.annotation.RequiresApi;
         import androidx.appcompat.app.AlertDialog;
         import androidx.appcompat.app.AppCompatActivity;
 
         import com.example.bi3wichri.Controller.SessionManager;
         import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 public class ajout_pdt extends AppCompatActivity {
 
@@ -57,7 +54,9 @@ public class ajout_pdt extends AppCompatActivity {
         ajouter_btn= findViewById(R.id.ajouter_btn);
         annuler_btn=findViewById(R.id.annuler_btn);
 
+
         String [] category = new String[]{"Vehicule","Emplois","Multimedia","Immobilier"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,category);
         category_lst.setAdapter(adapter);
 
@@ -122,7 +121,7 @@ public class ajout_pdt extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile_nav:
-                        startActivity(new Intent(getApplicationContext(),Profile.class));
+                        startActivity(new Intent(getApplicationContext(), Profile.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.logout_nav:
@@ -153,8 +152,6 @@ public class ajout_pdt extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 
     void pickFromGallery(){
@@ -205,3 +202,5 @@ public class ajout_pdt extends AppCompatActivity {
 
 
 }
+
+
