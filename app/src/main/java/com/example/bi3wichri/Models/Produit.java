@@ -3,11 +3,11 @@ package com.example.bi3wichri.Models;
 public class Produit {
     private int id_P;
     private String nom_P;
-    private Double prix_P;
+    private String prix_P;
     private String description_P;
     private String categorie_P;
 
-    public Produit(int id_P, String nom_P, Double prix_P, String description_P, String categorie_P) {
+    public Produit(int id_P, String nom_P, String prix_P, String description_P, String categorie_P) {
         this.id_P = id_P;
         this.nom_P = nom_P;
         this.prix_P = prix_P;
@@ -16,6 +16,9 @@ public class Produit {
     }
 
     public Produit() {
+    }
+
+    public Produit(String nomP, String prixP, String description_p, String catP) {
     }
 
     public int getId_P() {
@@ -34,11 +37,11 @@ public class Produit {
         this.nom_P = nom_P;
     }
 
-    public Double getPrix_P() {
+    public String getPrix_P() {
         return prix_P;
     }
 
-    public void setPrix_P(Double prix_P) {
+    public void setPrix_P(String prix_P) {
         this.prix_P = prix_P;
     }
 

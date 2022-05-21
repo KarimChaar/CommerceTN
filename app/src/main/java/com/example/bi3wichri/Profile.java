@@ -20,12 +20,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-@@ -13,13 +52,81 @@
+//@@ -13,13 +52,81 @@
 
 public class Profile extends AppCompatActivity {
 
     EditText nom,prenom,numero;
     ImageButton add;
+    LiteDatabaseHelper ldb;
     SessionManager sessionManager;
     ManageUsers manageUsers;
 
@@ -54,6 +55,9 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
+
+        //NAVIGATION BAR
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home_page_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

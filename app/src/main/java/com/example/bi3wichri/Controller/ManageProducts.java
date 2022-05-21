@@ -40,13 +40,14 @@ public class ManageProducts extends DBHandler {
         ManageTUsers.close();
         return i;
     }*/
-    public void addProduct(){
+
+    public void addProduct(Produit p){
         ManageTProducts=this.open();
             ContentValues v=new ContentValues();
-            v.put("nom_P", "Table");
-            v.put("prix_P", 200);
-            v.put("description", "salon et table à vendre dispo à l'aouina .veuillez contacter le 54 836 046");
-            v.put("cat_P","Immobilier");
+            v.put("nom_P", p.getNom_P());
+            v.put("prix_P", p.getPrix_P());
+            v.put("description", p.getDescription_P());
+            v.put("cat_P",p.getCategorie_P());
             ManageTProducts.insert("produits",null,v);
         ManageTProducts.close();
     }
@@ -63,7 +64,7 @@ public class ManageProducts extends DBHandler {
             do{
                 Produit prod= new Produit();
                 prod.setNom_P(cursor.getString(1));
-                prod.setPrix_P(cursor.getDouble(2));
+                prod.setPrix_P(cursor.getString(2));
                 prod.setDescription_P(cursor.getString(3));
                 prod.setCategorie_P(cursor.getString(4));
                 produits.add(prod);
@@ -87,7 +88,7 @@ public class ManageProducts extends DBHandler {
             do{
                 Produit prod= new Produit();
                 prod.setNom_P(cursor.getString(1));
-                prod.setPrix_P(cursor.getDouble(2));
+                prod.setPrix_P(cursor.getString(2));
                 prod.setDescription_P(cursor.getString(3));
                 prod.setCategorie_P(cursor.getString(4));
                 produits.add(prod);
@@ -111,7 +112,7 @@ public class ManageProducts extends DBHandler {
             do{
                 Produit prod= new Produit();
                 prod.setNom_P(cursor.getString(1));
-                prod.setPrix_P(cursor.getDouble(2));
+                prod.setPrix_P(cursor.getString(2));
                 prod.setDescription_P(cursor.getString(3));
                 prod.setCategorie_P(cursor.getString(4));
                 produits.add(prod);
@@ -135,7 +136,7 @@ public class ManageProducts extends DBHandler {
             do{
                 Produit prod= new Produit();
                 prod.setNom_P(cursor.getString(1));
-                prod.setPrix_P(cursor.getDouble(2));
+                prod.setPrix_P(cursor.getString(2));
                 prod.setDescription_P(cursor.getString(3));
                 prod.setCategorie_P(cursor.getString(4));
                 produits.add(prod);
