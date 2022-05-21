@@ -33,7 +33,7 @@ public class ajout_pdt extends AppCompatActivity {
     Spinner category_lst;
     ImageView img_preview;
     Button ajouter_btn,gallery_btn;
-    ManageProducts manageProducts;
+   // ManageProducts manageProducts;
 
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST = 1888;
@@ -82,13 +82,14 @@ public class ajout_pdt extends AppCompatActivity {
         ajouter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nomP = nom_pdt.getText().toString().trim();
+                System.out.println("hi");
+                /*String nomP = nom_pdt.getText().toString().trim();
                 String prixP = prix_pdt.getText().toString().trim();
                 String catP = category_lst.getSelectedItem().toString().trim();
-                String description_P = desk_pdt.getText().toString().trim();
+                String description_P = desk_pdt.getText().toString().trim();*/
                 System.out.println("deb---");
-                Produit p = new Produit("testprod", "666", "desc test", "vehicules");
-                ldb.insertProd(p);
+                //Produit p = new Produit("testprod", "666", "desc test", "vehicules");
+                ldb.insertProd("testprod", "666", "desc test", "vehicules");
                 //manageProducts.addProduct(p);
                 System.out.println("------INSERTED-----");
             }

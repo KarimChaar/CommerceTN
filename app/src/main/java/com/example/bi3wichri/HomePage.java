@@ -33,6 +33,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         sessionManager = new SessionManager(getApplicationContext());
+        ldb = new LiteDatabaseHelper(this.getApplicationContext());
         greetings=findViewById(R.id.Username);
         greetings.setText("Welcome to our application "+sessionManager.getName_U());
         //Partie ppour card views

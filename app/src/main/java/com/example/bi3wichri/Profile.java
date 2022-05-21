@@ -12,7 +12,9 @@ import android.widget.ImageButton;
 import com.example.bi3wichri.Controller.ManageProducts;
 import com.example.bi3wichri.Controller.ManageUsers;
 import com.example.bi3wichri.Controller.SessionManager;
+import com.example.bi3wichri.Models.Produit;
 import com.example.bi3wichri.Models.User;
+import com.example.bi3wichri.RecyclerViewsAdaptaters.ProductAdaptaters;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 //@@ -13,13 +52,81 @@
 
 public class Profile extends AppCompatActivity {
@@ -29,6 +36,7 @@ public class Profile extends AppCompatActivity {
     LiteDatabaseHelper ldb;
     SessionManager sessionManager;
     ManageUsers manageUsers;
+    RecyclerView rv;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -36,10 +44,12 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         sessionManager = new SessionManager(getApplicationContext());
+        ldb = new LiteDatabaseHelper(this.getApplicationContext());
         nom=findViewById(R.id.nom);
         prenom=findViewById(R.id.prenom);
         numero=findViewById(R.id.numero);
         manageUsers=new ManageUsers(this);
+        rv = findViewById(R.id.rv_produit);
         User userInfo= (User) manageUsers.getUser(sessionManager.getLogin_U());
 
         nom.setText(""+userInfo.getNom_U());
@@ -55,7 +65,12 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        List<Produit> prods= new ArrayList();
+        prods = ldb.fetchAllProds();
 
+        rv.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
+        ProductAdaptaters adapter = new ProductAdaptaters(this,prods);
+        rv.setAdapter(adapter);
 
         //NAVIGATION BAR
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
