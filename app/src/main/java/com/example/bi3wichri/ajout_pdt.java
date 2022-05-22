@@ -1,42 +1,39 @@
 package com.example.bi3wichri;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.Manifest;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.Spinner;
-        import android.app.Activity;
-        import android.graphics.Bitmap;
-        import android.net.Uri;
-        import android.widget.Toast;
-        import androidx.annotation.RequiresApi;
-        import androidx.appcompat.app.AlertDialog;
-        import androidx.appcompat.app.AppCompatActivity;
-
-        import com.example.bi3wichri.Controller.SessionManager;
-        import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.bi3wichri.Controller.ManageProducts;
+import com.example.bi3wichri.Models.Produit;
 
 
 public class ajout_pdt extends AppCompatActivity {
 
+    LiteDatabaseHelper ldb;
     ImageButton annuler_btn,camera_btn;
-    EditText nom_pdt,prix_pdt;
+    EditText nom_pdt,prix_pdt,desk_pdt;
     Spinner category_lst;
     ImageView img_preview;
     Button ajouter_btn,gallery_btn;
-    SessionManager sessionManager;
+   // ManageProducts manageProducts;
 
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST = 1888;
@@ -44,7 +41,8 @@ public class ajout_pdt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout_pdt);
-
+        ldb = new LiteDatabaseHelper(this.getApplicationContext());
+        //manageProducts = new ManageProducts(this.getApplicationContext());
         nom_pdt= findViewById(R.id.nom_pdt);
         prix_pdt= findViewById(R.id.prix_pdt);
         category_lst= findViewById(R.id.category_lst);
@@ -53,10 +51,9 @@ public class ajout_pdt extends AppCompatActivity {
         camera_btn= findViewById(R.id.camera_btn);
         ajouter_btn= findViewById(R.id.ajouter_btn);
         annuler_btn=findViewById(R.id.annuler_btn);
+        desk_pdt=findViewById(R.id.desk_pdt);
 
-
-        String [] category = new String[]{"Vehicule","Emplois","Multimedia","Immobilier"};
-
+        String [] category = new String[]{"vehicules","emplois","multimedia","entreprises"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,category);
         category_lst.setAdapter(adapter);
 
@@ -85,14 +82,16 @@ public class ajout_pdt extends AppCompatActivity {
         ajouter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nomP = nom_pdt.getText().toString().trim();
+                System.out.println("hi");
+                /*String nomP = nom_pdt.getText().toString().trim();
                 String prixP = prix_pdt.getText().toString().trim();
                 String catP = category_lst.getSelectedItem().toString().trim();
-                //GET IMG
-                //...
-
-                //PUSH TO DB
-                //...
+                String description_P = desk_pdt.getText().toString().trim();*/
+                System.out.println("deb---");
+                //Produit p = new Produit("testprod", "666", "desc test", "vehicules");
+                ldb.insertProd("testprod", "666", "desc test", "vehicules");
+                //manageProducts.addProduct(p);
+                System.out.println("------INSERTED-----");
             }
         });
 
@@ -107,51 +106,6 @@ public class ajout_pdt extends AppCompatActivity {
             }
         });
 
-        //PARTIE POUR LA NAV_BAR
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.home_page_nav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch(item.getItemId())
-                {
-                    case R.id.home_page_nav:
-                        startActivity(new Intent(getApplicationContext(),HomePage.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.profile_nav:
-                        startActivity(new Intent(getApplicationContext(), Profile.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.logout_nav:
-                        AlertDialog.Builder builder=new AlertDialog.Builder(ajout_pdt.this);
-                        builder.setTitle("Log out");
-                        builder.setMessage("Are you sure to log out?");
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                sessionManager.setLogin(false);
-                                sessionManager.setName_U("");
-                                sessionManager.setID_U(0);
-                                sessionManager.setLogin_U("");
-                                startActivity(new Intent(getApplicationContext(), Login.class));
-                                finish();
-                            }
-                        });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
-                        AlertDialog alertDialog= builder.create();
-                        alertDialog.show();
-                        return true;
-                }
-                return false;
-            }
-        });
     }
 
     void pickFromGallery(){
@@ -200,7 +154,4 @@ public class ajout_pdt extends AppCompatActivity {
         }
     }
 
-
 }
-
-

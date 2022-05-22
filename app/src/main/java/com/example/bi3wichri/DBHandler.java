@@ -29,7 +29,7 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table produits" +
                 "(id_P integer primary key autoincrement," +
                 "nom_P text not null," +
-                "prix_P real not null," +
+                "prix_P text not null," +
                 "description text not null,"+
                 "cat_P text not null)");
 

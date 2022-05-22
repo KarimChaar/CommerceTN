@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-
+import com.example.bi3wichri.LiteDatabaseHelper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,11 +17,15 @@ import android.widget.TextView;
 import com.example.bi3wichri.Controller.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class HomePage extends AppCompatActivity {
     private TextView greetings;
-    private Button btnlogout;
+    private Button btnlogout,testBtn;
     private CardView multimedia,emplois,vehicule,entreprises;
     SessionManager sessionManager;
+    LiteDatabaseHelper ldb;
+
 
 
     @Override
@@ -29,6 +33,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         sessionManager = new SessionManager(getApplicationContext());
+        ldb = new LiteDatabaseHelper(this.getApplicationContext());
         greetings=findViewById(R.id.Username);
         greetings.setText("Welcome to our application "+sessionManager.getName_U());
         //Partie ppour card views
@@ -36,6 +41,25 @@ public class HomePage extends AppCompatActivity {
         emplois=findViewById(R.id.emplois_card);
         entreprises=findViewById(R.id.immobilier_card);
         vehicule=findViewById(R.id.vehicule_card);
+
+
+
+
+        testBtn = findViewById(R.id.testbtn);
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("----display----");
+                System.out.println(ldb.fetchAllProds());
+
+                // manageProducts.addProduct();
+                //manageProducts.getAllProductsT();
+            }
+        });
+
+
+
+
 
         multimedia.setOnClickListener(new View.OnClickListener() {
             @Override
