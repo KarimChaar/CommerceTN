@@ -6,31 +6,46 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.bi3wichri.Controller.ManageProducts;
 import com.example.bi3wichri.Models.Produit;
+import com.example.bi3wichri.RecyclerViewsAdaptaters.ImmobilerAdaptater;
+import com.example.bi3wichri.RecyclerViewsAdaptaters.MultimediaAdaptater;
 import com.example.bi3wichri.RecyclerViewsAdaptaters.ProductAdaptaters;
 
 import java.util.ArrayList;
 
 public class Immobilier extends AppCompatActivity {
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewImmobilier;
     RecyclerView.LayoutManager layoutManager;
-    ProductAdaptaters productAdaptaters;
+    ImmobilerAdaptater immobilerAdaptater;
     ManageProducts manageProducts;
-
+    private TextView nosales;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_immobilier);
-        recyclerView=findViewById(R.id.RecyclerView);
-        layoutManager=new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration dividerItemDecoration=new DividerItemDecoration(recyclerView.getContext(),DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerViewImmobilier=findViewById(R.id.rv_immobilier);
+        nosales=findViewById(R.id.nosale_imm);
+
         manageProducts=new ManageProducts(this);
         ArrayList<Produit> listeProds = (ArrayList<Produit>) manageProducts.getAllProductsIm();
-        productAdaptaters=new ProductAdaptaters(this,listeProds);
-        recyclerView.setAdapter(productAdaptaters);
+        if (listeProds==null){
+            nosales.setText("No furnitures found for this moment");
+
+        }else {
+            layoutManager=new LinearLayoutManager(this);
+            recyclerViewImmobilier.setLayoutManager(layoutManager);
+
+            immobilerAdaptater = new ImmobilerAdaptater(this, listeProds);
+            recyclerViewImmobilier.setAdapter(immobilerAdaptater);
+
+
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+            recyclerViewImmobilier.addItemDecoration(dividerItemDecoration);
+
+        }
+
     }
 }

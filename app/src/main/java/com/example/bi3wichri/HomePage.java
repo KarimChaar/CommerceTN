@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import com.example.bi3wichri.LiteDatabaseHelper;
+//import com.example.bi3wichri.LiteDatabaseHelper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +21,9 @@ import java.util.ArrayList;
 
 public class HomePage extends AppCompatActivity {
     private TextView greetings;
-    private Button btnlogout,testBtn;
     private CardView multimedia,emplois,vehicule,entreprises;
     SessionManager sessionManager;
-    LiteDatabaseHelper ldb;
+ //   LiteDatabaseHelper ldb;
 
 
 
@@ -33,7 +32,7 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         sessionManager = new SessionManager(getApplicationContext());
-        ldb = new LiteDatabaseHelper(this.getApplicationContext());
+//        ldb = new LiteDatabaseHelper(this.getApplicationContext());
         greetings=findViewById(R.id.Username);
         greetings.setText("Welcome to our application "+sessionManager.getName_U());
         //Partie ppour card views
@@ -45,7 +44,7 @@ public class HomePage extends AppCompatActivity {
 
 
 
-        testBtn = findViewById(R.id.testbtn);
+/*        testBtn = findViewById(R.id.testbtn);
         testBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +54,7 @@ public class HomePage extends AppCompatActivity {
                 // manageProducts.addProduct();
                 //manageProducts.getAllProductsT();
             }
-        });
+        });*/
 
 
 

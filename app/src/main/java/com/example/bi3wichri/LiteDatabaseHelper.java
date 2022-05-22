@@ -61,7 +61,7 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
                 //"FOREIGN KEY("+KEY_ID_USR+") references user(id_P) on delete cascade on update no action)";
         db.execSQL(CREATE_PRODUCTS_TABLE);
 
-        /*String CREATE_USER_TABLE= "create table " +  TABLE_USER  + "(" +
+        String CREATE_USER_TABLE= "create table " +  TABLE_USER  + "(" +
                 KEY_ID_USR + " INTERGER PRIMARY KEY AUTOINCREMENT," +
                 KEY_NOM_USR + "TEXT," +
                 KEY_PRENOM_USR + "TEXT," +
@@ -76,7 +76,7 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
                 "photo_Pho Blob not null," +
                 "id_P integer," +
                 "foreign key(id_P) references produits(id_P) on delete cascade on update no action)";
-        db.execSQL(create_PHOTOS_TABLE);*/
+        db.execSQL(create_PHOTOS_TABLE);
     }
 
 
@@ -101,29 +101,9 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Produit> fetchAllProds(){
-        List<Produit> prdList = new ArrayList<Produit>();
-        String selectQuery = "SELECT  * FROM " + TABLE_PRODS;
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                Produit produit = new Produit();
-                produit.setId_P(Integer.parseInt(cursor.getString(0)));
-                produit.setNom_P(cursor.getString(1));
-                produit.setCategorie_P(cursor.getString(2));
-                produit.setDescription_P(cursor.getString(3));
-                produit.setPrix_P(cursor.getString(4));
-                // Adding contact to list
-                prdList.add(produit);
-            } while (cursor.moveToNext());
-        }
-        return prdList;
-    }
-
-    public List<Produit> fetchAllProdsByCat(String category){
+   /*public List<Produit> fetchAllProdsByCat(String category){
         List<Produit> prdList = new ArrayList<Produit>();
         String selectQuery = "SELECT  * FROM " + TABLE_PRODS+" where category ="+category;
 
@@ -143,13 +123,8 @@ public class LiteDatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return prdList;
-    }
+    }*/
 
-    public void deleteProd(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_PRODS, KEY_ID_PDT + " = ?",
-                new String[] { String.valueOf(id) });
-        db.close();
-    }
+
 
 }

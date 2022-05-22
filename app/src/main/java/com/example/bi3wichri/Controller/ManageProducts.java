@@ -28,28 +28,18 @@ public class ManageProducts extends DBHandler {
         ManageTProducts.close();
     }
 
-    /*public long addUser(Users users ){
-        ManageTProducts=this.open();
-        ContentValues v=new ContentValues();
-        v.put("nom_U",users.getNom_U());
-        v.put("prenom_U",users.getPrenom_U());
-        v.put("tel_U",users.getTel_U());
-        v.put("login",users.getLogin());
-        v.put("mdp",users.getMdp());
-        long i=ManageTUsers.insert("users",null,v);
-        ManageTUsers.close();
-        return i;
-    }*/
 
-    public void addProduct(Produit p){
-        ManageTProducts=this.open();
+    public Long addProduct(Produit prod){
+            ManageTProducts=this.getWritableDatabase();
             ContentValues v=new ContentValues();
-            v.put("nom_P", p.getNom_P());
-            v.put("prix_P", p.getPrix_P());
-            v.put("description", p.getDescription_P());
-            v.put("cat_P",p.getCategorie_P());
-            ManageTProducts.insert("produits",null,v);
+            System.out.println(prod.getNom_P());
+            v.put("nom_P", prod.getNom_P());
+            v.put("prix_P", prod.getPrix_P());
+            v.put("description", prod.getDescription_P());
+            v.put("cat_P",prod.getCategorie_P());
+            long i=ManageTProducts.insert("produits",null,v);
         ManageTProducts.close();
+        return i;
     }
     public List<Produit> getAllProductsIm(){
         ManageTProducts=this.getReadableDatabase();
@@ -146,43 +136,66 @@ public class ManageProducts extends DBHandler {
         ManageTProducts.close();
         return produits;
     }
-/*
-    public void delete(Users u){
-        ManageTUsers=this.open();
-        ManageTUsers.delete("users","id",new String[]{String.valueOf(u.getId_U())});
-        ManageTUsers.close();
-    }
 
-    public Users verifAuthentification(String login,String mdp){
+    public List<Produit> fetchAllProds(){
+        ManageTProducts=this.getReadableDatabase();
+        List<Produit> prdList = new ArrayList<Produit>();
+        String selectQuery = "SELECT * FROM produits" ;
+        Cursor cursor = ManageTProducts.rawQuery(selectQuery, null);
 
-        ManageTUsers=this.getReadableDatabase();
-        String query="Select * from users where login=? and mdp=? ;";
-        Cursor cursor=ManageTUsers.rawQuery(query,new String[] {login,mdp});
-
-        if (cursor.getColumnCount()==0) {
-            return null;
-        }
-
-
-        ManageTUsers=this.open();
-        ContentValues v=new ContentValues();
-        v.put("nom_U","immobilier");
-        ManageTUsers.insert("categories",null,v);
-
-
-        Users u1= new Users();
-
-        if(cursor.moveToFirst()){
-            u1.setId_U(cursor.getInt(0));
-            u1.setNom_U(cursor.getString(1));
-            u1.setPrenom_U(cursor.getString(2));
-            u1.setTel_U(cursor.getString(3));
-            u1.setLogin(cursor.getString(4));
-            u1.setMdp(cursor.getString(5));
+        if (cursor.moveToFirst()) {
+            do {
+                Produit produit = new Produit();
+                produit.setId_P(Integer.parseInt(cursor.getString(0)));
+                produit.setNom_P(cursor.getString(1));
+                produit.setCategorie_P(cursor.getString(2));
+                produit.setDescription_P(cursor.getString(3));
+                produit.setPrix_P(cursor.getString(4));
+                // Adding contact to list
+                prdList.add(produit);
+            } while (cursor.moveToNext());
         }
         cursor.close();
-        ManageTUsers.close();
-        return  u1;
+        ManageTProducts.close();
+        return prdList;
     }
-*/
+
+    public void deleteProd(Produit p) {
+        ManageTProducts=this.open();
+
+        ManageTProducts.delete("produits", "id_P" + " = ?",
+                new String[] { String.valueOf(p.getId_P()) });
+        ManageTProducts.close();
+    }
+
+
+    public Produit getProduit(String p){
+        ManageTProducts=this.getReadableDatabase();
+        String query="select * from produits where nom_P = ?";
+        Cursor cursor = ManageTProducts.rawQuery(query, new String[]{p});
+        Produit produit = new Produit();
+        if (cursor.moveToFirst()) {
+                produit.setId_P(Integer.parseInt(cursor.getString(0)));
+                produit.setNom_P(cursor.getString(1));
+                produit.setCategorie_P(cursor.getString(2));
+                produit.setDescription_P(cursor.getString(3));
+                produit.setPrix_P(cursor.getString(4));
+        }
+        return produit;
+    }
+
+
+    public long updateProduct(Produit prod)
+    {
+
+        ManageTProducts=this.open();
+        ContentValues v=new ContentValues();
+        v.put("nom_P", prod.getNom_P());
+        v.put("prix_P", prod.getPrix_P());
+        v.put("cat_P", prod.getCategorie_P());
+        v.put("description", prod.getDescription_P());
+         return ManageTProducts.update("produits",v,"id_P= ?",new String[]{String.valueOf(prod.getId_P())});
+
+    }
+
 }

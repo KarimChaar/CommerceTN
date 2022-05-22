@@ -24,14 +24,18 @@ public class DBHandler extends SQLiteOpenHelper {
                 "prenom_U text not null," +
                 "tel_U text not null," +
                 "login text not null unique," +
-                "mdp text not null)");
+                "mdp text not null)"
+        );
 
         sqLiteDatabase.execSQL("create table produits" +
                 "(id_P integer primary key autoincrement," +
                 "nom_P text not null," +
                 "prix_P text not null," +
                 "description text not null,"+
-                "cat_P text not null)");
+                "cat_P text not null,"+
+                "id_user  integer,"+
+                "FOREIGN KEY(id_user) references user(id_U) on delete cascade on update no action);"
+        );
 
         sqLiteDatabase.execSQL("create table photos" +
                 "(id_Pho integer primary key autoincrement," +
@@ -53,14 +57,16 @@ public class DBHandler extends SQLiteOpenHelper {
                 "prenom_U text not null," +
                 "tel_U text not null," +
                 "login text not null unique," +
-                "mdp text not null)");
+                "mdp text not null);");
 
         sqLiteDatabase.execSQL("create table produits" +
                 "(id_P integer primary key autoincrement," +
                 "nom_P text not null," +
                 "prix_P real not null," +
                 "description text not null,"+
-                "cat_P text not null)");
+                "cat_P text not null,"+
+                "id_user  integer,"+
+                "FOREIGN KEY(id_user) references user(id_U) on delete cascade on update no action);");
 
         sqLiteDatabase.execSQL("create table photos" +
                 "(id_Pho integer primary key autoincrement," +

@@ -22,18 +22,21 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bi3wichri.Controller.ManageProducts;
+import com.example.bi3wichri.Controller.ManageUsers;
+import com.example.bi3wichri.Controller.SessionManager;
 import com.example.bi3wichri.Models.Produit;
+import com.example.bi3wichri.Models.User;
 
 
 public class ajout_pdt extends AppCompatActivity {
 
-    LiteDatabaseHelper ldb;
+
     ImageButton annuler_btn,camera_btn;
     EditText nom_pdt,prix_pdt,desk_pdt;
     Spinner category_lst;
     ImageView img_preview;
     Button ajouter_btn,gallery_btn;
-   // ManageProducts manageProducts;
+    ManageProducts manageProducts;
 
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST = 1888;
@@ -41,8 +44,8 @@ public class ajout_pdt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout_pdt);
-        ldb = new LiteDatabaseHelper(this.getApplicationContext());
-        //manageProducts = new ManageProducts(this.getApplicationContext());
+
+
         nom_pdt= findViewById(R.id.nom_pdt);
         prix_pdt= findViewById(R.id.prix_pdt);
         category_lst= findViewById(R.id.category_lst);
@@ -53,7 +56,7 @@ public class ajout_pdt extends AppCompatActivity {
         annuler_btn=findViewById(R.id.annuler_btn);
         desk_pdt=findViewById(R.id.desk_pdt);
 
-        String [] category = new String[]{"vehicules","emplois","multimedia","entreprises"};
+        String [] category = new String[]{"Vehicule","Emplois","Multimedia","Immobilier"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,category);
         category_lst.setAdapter(adapter);
 
@@ -82,16 +85,18 @@ public class ajout_pdt extends AppCompatActivity {
         ajouter_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("hi");
-                /*String nomP = nom_pdt.getText().toString().trim();
-                String prixP = prix_pdt.getText().toString().trim();
-                String catP = category_lst.getSelectedItem().toString().trim();
-                String description_P = desk_pdt.getText().toString().trim();*/
-                System.out.println("deb---");
-                //Produit p = new Produit("testprod", "666", "desc test", "vehicules");
-                ldb.insertProd("testprod", "666", "desc test", "vehicules");
-                //manageProducts.addProduct(p);
-                System.out.println("------INSERTED-----");
+                manageProducts = new ManageProducts(getApplicationContext());
+
+                Produit p = new Produit(nom_pdt.getText().toString().trim(), prix_pdt.getText().toString().trim()
+                        , desk_pdt.getText().toString().trim(), category_lst.getSelectedItem().toString().trim());
+                Long i=manageProducts.addProduct(p);
+                if (i!=-1){
+                    Toast.makeText(ajout_pdt.this,"ajout avec succés",Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(ajout_pdt.this,"erreur",Toast.LENGTH_SHORT).show();
+                }
+                startActivity(new Intent(getApplicationContext(),Profile.class));
+
             }
         });
 

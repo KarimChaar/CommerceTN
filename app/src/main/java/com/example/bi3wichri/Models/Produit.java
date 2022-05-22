@@ -7,8 +7,7 @@ public class Produit {
     private String description_P;
     private String categorie_P;
 
-    public Produit(int id_P, String nom_P, String prix_P, String description_P, String categorie_P) {
-        this.id_P = id_P;
+    public Produit(String nom_P, String prix_P, String description_P, String categorie_P) {
         this.nom_P = nom_P;
         this.prix_P = prix_P;
         this.description_P = description_P;
@@ -18,8 +17,6 @@ public class Produit {
     public Produit() {
     }
 
-    public Produit(String nomP, String prixP, String description_p, String catP) {
-    }
 
     public int getId_P() {
         return id_P;

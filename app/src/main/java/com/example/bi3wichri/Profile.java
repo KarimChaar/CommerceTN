@@ -33,7 +33,7 @@ public class Profile extends AppCompatActivity {
 
     EditText nom,prenom,numero;
     ImageButton add;
-    LiteDatabaseHelper ldb;
+    ManageProducts manageProducts;
     SessionManager sessionManager;
     ManageUsers manageUsers;
     RecyclerView rv;
@@ -44,7 +44,6 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         sessionManager = new SessionManager(getApplicationContext());
-        ldb = new LiteDatabaseHelper(this.getApplicationContext());
         nom=findViewById(R.id.nom);
         prenom=findViewById(R.id.prenom);
         numero=findViewById(R.id.numero);
@@ -65,8 +64,9 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        List<Produit> prods= new ArrayList();
-        prods = ldb.fetchAllProds();
+        manageProducts=new ManageProducts(this);
+        List<Produit> prods= manageProducts.fetchAllProds();
+
 
         rv.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
         ProductAdaptaters adapter = new ProductAdaptaters(this,prods);
