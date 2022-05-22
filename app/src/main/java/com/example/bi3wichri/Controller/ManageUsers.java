@@ -70,6 +70,18 @@ public void close(){
             ManageTUsers.close();
     }
 
+    public String getPhoneNumber(int id){
+
+        ManageTUsers=this.getReadableDatabase();
+        String query="select * from users where id_U = ? ;";
+        Cursor cursor=ManageTUsers.rawQuery(query,new String[]{String.valueOf(id)});
+        if (cursor.moveToFirst()){
+           return cursor.getString(3);
+        }
+        return null;
+    }
+
+
     public User getUser(String login){
         User u = new User();
         ManageTUsers=this.getReadableDatabase();

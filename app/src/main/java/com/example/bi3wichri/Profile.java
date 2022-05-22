@@ -65,7 +65,7 @@ public class Profile extends AppCompatActivity {
         });
 
         manageProducts=new ManageProducts(this);
-        List<Produit> prods= manageProducts.fetchAllProds();
+        List<Produit> prods= manageProducts.fetchAllProds(userInfo);
 
 
         rv.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));

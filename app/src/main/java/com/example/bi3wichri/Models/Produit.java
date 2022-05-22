@@ -6,6 +6,9 @@ public class Produit {
     private String prix_P;
     private String description_P;
     private String categorie_P;
+    private int id_user;
+
+
 
     public Produit(String nom_P, String prix_P, String description_P, String categorie_P) {
         this.nom_P = nom_P;
@@ -14,9 +17,24 @@ public class Produit {
         this.categorie_P = categorie_P;
     }
 
+    public Produit(String nom_P, String prix_P, String description_P, String categorie_P,int id_user) {
+        this.nom_P = nom_P;
+        this.prix_P = prix_P;
+        this.description_P = description_P;
+        this.categorie_P = categorie_P;
+        this.id_user=id_user;
+    }
+
     public Produit() {
     }
 
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
 
     public int getId_P() {
         return id_P;

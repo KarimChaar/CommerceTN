@@ -29,7 +29,7 @@ public class ManageProducts extends DBHandler {
     }
 
 
-    public Long addProduct(Produit prod){
+    public Long addProduct(Produit prod,User u){
             ManageTProducts=this.getWritableDatabase();
             ContentValues v=new ContentValues();
             System.out.println(prod.getNom_P());
@@ -37,6 +37,7 @@ public class ManageProducts extends DBHandler {
             v.put("prix_P", prod.getPrix_P());
             v.put("description", prod.getDescription_P());
             v.put("cat_P",prod.getCategorie_P());
+            v.put("id_user",u.getId_U());
             long i=ManageTProducts.insert("produits",null,v);
         ManageTProducts.close();
         return i;
@@ -57,6 +58,7 @@ public class ManageProducts extends DBHandler {
                 prod.setPrix_P(cursor.getString(2));
                 prod.setDescription_P(cursor.getString(3));
                 prod.setCategorie_P(cursor.getString(4));
+                prod.setId_user(cursor.getInt(5));
                 produits.add(prod);
             }while(cursor.moveToNext());
         }
@@ -137,10 +139,10 @@ public class ManageProducts extends DBHandler {
         return produits;
     }
 
-    public List<Produit> fetchAllProds(){
+    public List<Produit> fetchAllProds(User u){
         ManageTProducts=this.getReadableDatabase();
         List<Produit> prdList = new ArrayList<Produit>();
-        String selectQuery = "SELECT * FROM produits" ;
+        String selectQuery = "SELECT * FROM produits where id_user ="+u.getId_U() ;
         Cursor cursor = ManageTProducts.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {

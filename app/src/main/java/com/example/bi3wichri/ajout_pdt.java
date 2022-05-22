@@ -29,8 +29,8 @@ import com.example.bi3wichri.Models.User;
 
 
 public class ajout_pdt extends AppCompatActivity {
-
-
+    SessionManager sessionManager;
+    ManageUsers manageUsers;
     ImageButton annuler_btn,camera_btn;
     EditText nom_pdt,prix_pdt,desk_pdt;
     Spinner category_lst;
@@ -44,8 +44,8 @@ public class ajout_pdt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout_pdt);
-
-
+        sessionManager = new SessionManager(getApplicationContext());
+        manageUsers=new ManageUsers(this);
         nom_pdt= findViewById(R.id.nom_pdt);
         prix_pdt= findViewById(R.id.prix_pdt);
         category_lst= findViewById(R.id.category_lst);
@@ -55,6 +55,8 @@ public class ajout_pdt extends AppCompatActivity {
         ajouter_btn= findViewById(R.id.ajouter_btn);
         annuler_btn=findViewById(R.id.annuler_btn);
         desk_pdt=findViewById(R.id.desk_pdt);
+
+        User userInfo= (User) manageUsers.getUser(sessionManager.getLogin_U());
 
         String [] category = new String[]{"Vehicule","Emplois","Multimedia","Immobilier"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,category);
@@ -89,7 +91,7 @@ public class ajout_pdt extends AppCompatActivity {
 
                 Produit p = new Produit(nom_pdt.getText().toString().trim(), prix_pdt.getText().toString().trim()
                         , desk_pdt.getText().toString().trim(), category_lst.getSelectedItem().toString().trim());
-                Long i=manageProducts.addProduct(p);
+                Long i=manageProducts.addProduct(p,userInfo);
                 if (i!=-1){
                     Toast.makeText(ajout_pdt.this,"ajout avec succés",Toast.LENGTH_LONG).show();
                 }else {
@@ -158,5 +160,6 @@ public class ajout_pdt extends AppCompatActivity {
             }
         }
     }
+
 
 }
